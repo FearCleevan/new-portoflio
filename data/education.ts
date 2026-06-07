@@ -1,0 +1,14 @@
+import type { EducationEntry } from "@/types/content";
+
+export const education: EducationEntry[] = [
+  {
+    id: "edu-1",
+    degree: "Bachelor of Science in Information Technology",
+    school: "Samson Polytechnic College of Davao",
+    schoolUrl: "",
+    period: "2021 – 2025",
+    location: "Davao City",
+    description:
+      "Graduated with academic excellence from a 4-year BS Information Technology program — recognized for outstanding performance in both Industry Immersion and the Capstone Project.",
+  },
+];

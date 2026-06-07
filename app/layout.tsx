@@ -4,6 +4,7 @@ import "./globals.css";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { ShaderBackground } from "@/components/effects/ShaderBackground";
 import { SmoothScroll } from "@/components/effects/SmoothScroll";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -152,6 +153,10 @@ export default function RootLayout({
         />
       </head>
       <body>
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
+
         {/* Fullscreen shader — behind everything */}
         <ShaderBackground />
 

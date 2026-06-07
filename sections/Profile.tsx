@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { SectionLabel } from "@/components/layout/SectionLabel";
 import { Card } from "@/components/shared/Card";
@@ -167,7 +169,7 @@ export function Profile() {
 
           {/* External links */}
           <ZoomReveal delay={0.36}>
-            <div className="flex items-center gap-8">
+            <div className="flex items-center flex-wrap gap-8">
               {links.map((link) => (
                 <a
                   key={link.label}
@@ -179,6 +181,36 @@ export function Profile() {
                   {link.label} ↗
                 </a>
               ))}
+              <button
+                onClick={() => {
+                  const target = document.getElementById("contact");
+                  if (!target) return;
+                  if (window.__lenis) {
+                    window.__lenis.scrollTo(target, { offset: 0, duration: 1.6 });
+                  } else {
+                    target.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="font-mono text-[11px] tracking-widest uppercase transition-colors text-[var(--base)] hover:text-[var(--base)]"
+                style={{
+                  backgroundColor: "var(--off-white)",
+                  border: "1px solid var(--off-white)",
+                  padding: "0.45rem 1.1rem",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
+                  (e.currentTarget as HTMLElement).style.color = "var(--off-white)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "var(--off-white)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = "var(--off-white)";
+                  (e.currentTarget as HTMLElement).style.color = "var(--base)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "var(--off-white)";
+                }}
+              >
+                Message Me ↓
+              </button>
             </div>
           </ZoomReveal>
         </div>

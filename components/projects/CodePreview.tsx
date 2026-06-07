@@ -102,12 +102,6 @@ export function CodePreview({ repo, githubUrl }: CodePreviewProps) {
         />
       </div>
 
-      {/* Divider */}
-      <div
-        className="hidden md:block w-px shrink-0 self-stretch"
-        style={{ backgroundColor: "var(--step-3)" }}
-      />
-
       {/* ── File viewer ───────────────────────────────────────────────── */}
       <div className="flex-1 h-[300px] md:h-auto overflow-hidden">
         <FileViewer

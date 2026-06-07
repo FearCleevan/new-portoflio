@@ -126,7 +126,6 @@ function TreeNode({
           paddingLeft: `${depth * 14 + 10}px`,
           backgroundColor: isSelected ? "var(--step-3)" : "transparent",
           color: isSelected ? "var(--off-white)" : "var(--step-6)",
-          outlineColor: "var(--step-4)",
           transition: "background-color 80ms, color 80ms",
         }}
         onMouseEnter={(e) => {

@@ -8,6 +8,7 @@ import { ParallaxLayer } from "@/components/motion/ParallaxLayer";
 import { ZoomReveal } from "@/components/motion/ZoomReveal";
 import { StaggerContainer, StaggerItem } from "@/components/motion/StaggerReveal";
 import { personal } from "@/data/personal";
+import { scrollToSection } from "@/lib/scrollToSection";
 
 const quickFacts = [
   { label: "Role",     value: "Full-Stack Developer" },
@@ -182,15 +183,7 @@ export function Profile() {
                 </a>
               ))}
               <button
-                onClick={() => {
-                  const target = document.getElementById("contact");
-                  if (!target) return;
-                  if (window.__lenis) {
-                    window.__lenis.scrollTo(target, { offset: 0, duration: 1.6 });
-                  } else {
-                    target.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
+                onClick={() => scrollToSection("contact")}
                 className="font-mono text-[11px] tracking-widest uppercase transition-colors text-[var(--base)] hover:text-[var(--base)]"
                 style={{
                   backgroundColor: "var(--off-white)",

@@ -54,3 +54,12 @@ export interface Skills {
   professional: string[];
   soft: string[];
 }
+
+export interface ServiceOffering {
+  id: string;
+  index: string;
+  title: string;
+  tagline: string;
+  scope: string[];
+  timeline: string;
+}

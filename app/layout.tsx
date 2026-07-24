@@ -6,6 +6,7 @@ import { ShaderBackground } from "@/components/effects/ShaderBackground";
 import { SmoothScroll } from "@/components/effects/SmoothScroll";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SITE_URL } from "@/lib/constants";
+import { services } from "@/data/services";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -136,6 +137,37 @@ export default function RootLayout({
     ],
   };
 
+  const professionalServiceLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Peter Paul Lazan — Web Development Services",
+    url: BASE_URL,
+    image: `${BASE_URL}/profile.png`,
+    priceRange: "$$",
+    areaServed: [
+      { "@type": "Country", name: "Canada" },
+      { "@type": "Country", name: "United States" },
+      { "@type": "Country", name: "Philippines" },
+    ],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Davao City",
+      addressCountry: "PH",
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Web Development Services",
+      itemListElement: services.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.title,
+          description: service.tagline,
+        },
+      })),
+    },
+  };
+
   return (
     <html
       lang="en"
@@ -145,6 +177,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceLd) }}
         />
       </head>
       <body>

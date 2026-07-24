@@ -35,20 +35,11 @@ export async function generateMetadata({
       url,
       title: `${project.title} — Peter Paul Lazan`,
       description: project.tagline,
-      images: [
-        {
-          url: project.heroImage,
-          width: 1600,
-          height: 800,
-          alt: project.title,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: `${project.title} — Peter Paul Lazan`,
       description: project.tagline,
-      images: [project.heroImage],
     },
   };
 }

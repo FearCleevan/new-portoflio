@@ -63,3 +63,9 @@ export interface ServiceOffering {
   scope: string[];
   timeline: string;
 }
+
+export interface FaqEntry {
+  id: string;
+  question: string;
+  answer: string;
+}

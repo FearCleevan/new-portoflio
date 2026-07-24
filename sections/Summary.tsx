@@ -41,7 +41,7 @@ export function Summary() {
         {/* Editorial positioning statement */}
         <ZoomReveal delay={0.1}>
           <h2
-            className="font-display font-medium uppercase leading-[1.05] tracking-tight mb-14"
+            className="font-display font-medium uppercase leading-[1.05] tracking-tight mb-4"
             style={{ fontSize: "clamp(28px, 4.5vw, 56px)", color: "var(--off-white)" }}
           >
             I build{" "}
@@ -54,6 +54,15 @@ export function Summary() {
             </em>{" "}
             — from database schema to polished UI.
           </h2>
+        </ZoomReveal>
+
+        <ZoomReveal delay={0.16}>
+          <p
+            className="font-body text-sm leading-relaxed mb-14 max-w-xl"
+            style={{ color: "var(--step-6)" }}
+          >
+            Based in the Philippines, building for clients across Canada and the US.
+          </p>
         </ZoomReveal>
 
         {/* Stats strip */}

@@ -7,6 +7,11 @@ import { StaggerContainer, StaggerItem } from "@/components/motion/StaggerReveal
 import { ContactForm } from "@/components/contact/ContactForm";
 import { personal } from "@/data/personal";
 
+// Philippine mobile numbers: drop the leading trunk "0" and prefix the
+// country code for a wa.me click-to-chat link (e.g. 09151234567 -> 639151234567)
+const whatsappNumber = personal.phone.replace(/^0/, "63");
+const whatsappMessage = encodeURIComponent("Hi Peter Paul, I'd like to talk about a project.");
+
 const contactMethods = [
   {
     index: "01",
@@ -24,6 +29,14 @@ const contactMethods = [
   },
   {
     index: "03",
+    label: "WhatsApp",
+    value: "Chat with me directly",
+    href: `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`,
+    cta: "Start a chat →",
+    external: true,
+  },
+  {
+    index: "04",
     label: "Book a Call",
     value: "30-min intro via Calendly",
     href: personal.calendlyUrl,
@@ -71,7 +84,7 @@ export function Contact() {
       </ZoomReveal>
 
       {/* Quick contact cards */}
-      <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
+      <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
         {contactMethods.map((method) => (
           <StaggerItem key={method.index}>
             <a

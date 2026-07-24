@@ -1,3 +1,14 @@
+"use client";
+
+import { scrollToSection } from "@/lib/scrollToSection";
+
+const navItems = [
+  { id: "home", label: "Home" },
+  { id: "services", label: "Services" },
+  { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" },
+];
+
 export function Sidebar() {
   return (
     <aside
@@ -8,11 +19,29 @@ export function Sidebar() {
         backgroundColor: "var(--base)",
       }}
     >
-      {/* Top accent dot */}
-      <div
-        className="w-1.5 h-1.5 rounded-full"
-        style={{ backgroundColor: "var(--off-white)" }}
-      />
+      {/* Section nav — dot markers, replacing the old static accent dot */}
+      <nav aria-label="Section navigation" className="flex flex-col items-center gap-5">
+        {navItems.map((item, i) => (
+          <button
+            key={item.id}
+            type="button"
+            title={item.label}
+            aria-label={`Scroll to ${item.label}`}
+            onClick={() => scrollToSection(item.id)}
+            className="group flex items-center justify-center p-1.5"
+            style={{ background: "none", border: "none", cursor: "pointer" }}
+          >
+            <span
+              className="rounded-full transition-colors group-hover:bg-[var(--off-white)] group-focus-visible:bg-[var(--off-white)]"
+              style={{
+                width: i === 0 ? "6px" : "5px",
+                height: i === 0 ? "6px" : "5px",
+                backgroundColor: i === 0 ? "var(--off-white)" : "var(--step-4)",
+              }}
+            />
+          </button>
+        ))}
+      </nav>
 
       {/* Vertical wordmark — centred */}
       <div className="flex flex-col items-center gap-1">

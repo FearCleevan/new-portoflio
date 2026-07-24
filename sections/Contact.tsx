@@ -55,7 +55,7 @@ export function Contact() {
 
       {/* Headline */}
       <ZoomReveal delay={0.08}>
-        <p
+        <h2
           className="font-display font-medium uppercase leading-[1.05] tracking-tight mb-14 max-w-3xl"
           style={{ fontSize: "clamp(28px, 4.5vw, 56px)", color: "var(--off-white)" }}
         >
@@ -67,7 +67,7 @@ export function Contact() {
           <em className="italic" style={{ color: "var(--off-white)" }}>
             build it together.
           </em>
-        </p>
+        </h2>
       </ZoomReveal>
 
       {/* Quick contact cards */}

@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { SITE_URL } from "@/lib/constants";
 
 export const runtime = "edge";
 export const alt = "Peter Paul Lazan — Full-Stack Developer";
@@ -8,7 +9,7 @@ export const contentType = "image/png";
 const tags = ["React", "Next.js", "TypeScript", "React Native", "Supabase", "Node.js"];
 
 export default async function Image() {
-  const profileRes = await fetch(new URL("/profile.png", "https://lazandev.vercel.app"));
+  const profileRes = await fetch(new URL("/profile.png", SITE_URL));
   const profileBuffer = await profileRes.arrayBuffer();
   const profileBase64 = `data:image/png;base64,${Buffer.from(profileBuffer).toString("base64")}`;
 
@@ -155,7 +156,7 @@ export default async function Image() {
                 color: "#555",
               }}
             >
-              lazandev.vercel.app
+              peterpaullazan.com
             </span>
           </div>
 

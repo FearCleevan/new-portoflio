@@ -40,7 +40,7 @@ export function Summary() {
       <div className="max-w-5xl">
         {/* Editorial positioning statement */}
         <ZoomReveal delay={0.1}>
-          <p
+          <h2
             className="font-display font-medium uppercase leading-[1.05] tracking-tight mb-14"
             style={{ fontSize: "clamp(28px, 4.5vw, 56px)", color: "var(--off-white)" }}
           >
@@ -53,7 +53,7 @@ export function Summary() {
               genuinely useful
             </em>{" "}
             — from database schema to polished UI.
-          </p>
+          </h2>
         </ZoomReveal>
 
         {/* Stats strip */}

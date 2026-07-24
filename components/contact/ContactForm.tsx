@@ -5,6 +5,8 @@ import { personal } from "@/data/personal";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
+const GENERIC_ERROR = "The message could not be delivered. Please try again.";
+
 const SHEET_URL = process.env.NEXT_PUBLIC_CONTACT_SHEET_URL ?? "";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -19,6 +21,7 @@ export function ContactForm() {
   const [message, setMessage]   = useState("");
   const [emailTouched, setEmailTouched] = useState(false);
   const [status, setStatus]     = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const successRef = useRef<HTMLDivElement>(null);
 
   const emailError = emailTouched && email.length > 0 && !isValidEmail(email);
@@ -35,23 +38,35 @@ export function ContactForm() {
     if (!canSubmit) return;
 
     setStatus("sending");
+    setErrorMessage(null);
 
     if (SHEET_URL) {
-      const params = new URLSearchParams({ name, email, message });
-      await fetch(SHEET_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params.toString(),
-      });
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, message }),
+        });
+        const data: { ok: boolean; error?: string } | null = await res.json().catch(() => null);
 
-      setStatus("sent");
-      setName("");
-      setMessage("");
-      return;
+        if (!res.ok || !data?.ok) {
+          setErrorMessage(data?.error ?? GENERIC_ERROR);
+          setStatus("error");
+          return;
+        }
+
+        setStatus("sent");
+        setName("");
+        setMessage("");
+        return;
+      } catch {
+        setErrorMessage(GENERIC_ERROR);
+        setStatus("error");
+        return;
+      }
     }
 
-    // mailto fallback
+    // mailto fallback — used only when no contact endpoint is configured
     const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
     const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
     window.open(`mailto:${personal.email}?subject=${subject}&body=${body}`, "_blank");
@@ -195,6 +210,17 @@ export function ContactForm() {
           onBlur={(e)  => (e.currentTarget.style.borderColor = "var(--step-3)")}
         />
       </div>
+
+      {/* Delivery error */}
+      {status === "error" && errorMessage && (
+        <div
+          className="font-mono text-[11px] tracking-wide"
+          style={{ color: "#e05c5c", border: "1px solid #e05c5c", padding: "0.75rem 1rem" }}
+          role="alert"
+        >
+          {errorMessage}
+        </div>
+      )}
 
       {/* Submit */}
       <div className="flex items-center gap-6 flex-wrap">

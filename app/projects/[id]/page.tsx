@@ -7,12 +7,13 @@ import { SectionLabel } from "@/components/layout/SectionLabel";
 import { MarkdownRenderer } from "@/components/projects/MarkdownRenderer";
 import { CodePreview } from "@/components/projects/CodePreview";
 import { ZoomReveal } from "@/components/motion/ZoomReveal";
+import { SITE_URL } from "@/lib/constants";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ id: p.id }));
 }
 
-const BASE_URL = "https://lazandev.vercel.app";
+const BASE_URL = SITE_URL;
 
 export async function generateMetadata({
   params,
@@ -200,12 +201,14 @@ export default async function ProjectPage({
 
           {/* Project links */}
           <div className="flex items-center gap-6 mb-12">
-            <a
-              href={project.github}
-              className="font-mono text-[11px] tracking-widest uppercase transition-colors text-[var(--step-5)] hover:text-[var(--off-white)]"
-            >
-              GitHub ↗
-            </a>
+            {project.github !== "#" && (
+              <a
+                href={project.github}
+                className="font-mono text-[11px] tracking-widest uppercase transition-colors text-[var(--step-5)] hover:text-[var(--off-white)]"
+              >
+                GitHub ↗
+              </a>
+            )}
             {project.live && (
               <a
                 href={project.live}

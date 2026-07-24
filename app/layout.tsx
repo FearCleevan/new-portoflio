@@ -5,6 +5,7 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { ShaderBackground } from "@/components/effects/ShaderBackground";
 import { SmoothScroll } from "@/components/effects/SmoothScroll";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { SITE_URL } from "@/lib/constants";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -27,7 +28,7 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["300", "400", "500"],
 });
 
-const BASE_URL = "https://lazandev.vercel.app";
+const BASE_URL = SITE_URL;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -101,12 +102,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-
-  icons: {
-    icon: "/profile.png",
-    shortcut: "/profile.png",
-    apple: "/profile.png",
   },
 };
 

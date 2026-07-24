@@ -23,17 +23,17 @@ function HeroLine({
   const mounted = useHasMounted();
   const prefersReduced = useReducedMotion();
 
-  // Pre-mount (server + first client render): plain visible h1
+  // Pre-mount (server + first client render): plain visible div
   if (!mounted || prefersReduced) {
     return (
-      <h1 className={className} style={style}>
+      <div className={className} style={style}>
         {children}
-      </h1>
+      </div>
     );
   }
 
   return (
-    <motion.h1
+    <motion.div
       className={className}
       style={style}
       initial={{ opacity: 0, x: -40 }}
@@ -41,7 +41,7 @@ function HeroLine({
       transition={{ duration: 0.9, delay, ease: EASE }}
     >
       {children}
-    </motion.h1>
+    </motion.div>
   );
 }
 
@@ -114,28 +114,32 @@ export function Hero() {
           </div>
         )}
 
-        {/* Display heading lines — staggered slide-in from left */}
-        <HeroLine
-          delay={0.3}
-          className="font-display font-bold uppercase leading-[0.88] tracking-tight"
-          style={{ fontSize: "clamp(72px, 13vw, 176px)", color: "var(--off-white)" }}
-        >
-          Full
-        </HeroLine>
-        <HeroLine
-          delay={0.42}
-          className="font-display font-bold uppercase leading-[0.88] tracking-tight mb-2"
-          style={{ fontSize: "clamp(72px, 13vw, 176px)", color: "var(--off-white)" }}
-        >
-          Stack
-        </HeroLine>
-        <HeroLine
-          delay={0.54}
-          className="font-display font-light uppercase leading-[0.88] tracking-tight mb-10"
-          style={{ fontSize: "clamp(72px, 13vw, 176px)", color: "var(--mid-gray)" }}
-        >
-          Developer
-        </HeroLine>
+        {/* Display heading lines — staggered slide-in from left.
+            A single semantic h1 wraps all three visual lines; display:contents
+            keeps it from introducing a box, so the layout is unchanged. */}
+        <h1 style={{ display: "contents" }}>
+          <HeroLine
+            delay={0.3}
+            className="font-display font-bold uppercase leading-[0.88] tracking-tight"
+            style={{ fontSize: "clamp(72px, 13vw, 176px)", color: "var(--off-white)" }}
+          >
+            Full
+          </HeroLine>
+          <HeroLine
+            delay={0.42}
+            className="font-display font-bold uppercase leading-[0.88] tracking-tight mb-2"
+            style={{ fontSize: "clamp(72px, 13vw, 176px)", color: "var(--off-white)" }}
+          >
+            Stack
+          </HeroLine>
+          <HeroLine
+            delay={0.54}
+            className="font-display font-light uppercase leading-[0.88] tracking-tight mb-10"
+            style={{ fontSize: "clamp(72px, 13vw, 176px)", color: "var(--mid-gray)" }}
+          >
+            Developer
+          </HeroLine>
+        </h1>
 
         {/* Subtitle rule */}
         {mounted && !prefersReduced ? (

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { SectionLabel } from "@/components/layout/SectionLabel";
 import { Card } from "@/components/shared/Card";
 import { CircleDecor } from "@/components/shared/CircleDecor";
@@ -19,9 +20,9 @@ const quickFacts = [
 ];
 
 const links = [
-  { label: "GitHub",   href: personal.githubUrl },
-  { label: "LinkedIn", href: personal.linkedinUrl },
-  { label: "Résumé",   href: personal.cvUrl },
+  { label: "GitHub",   href: personal.githubUrl, external: true },
+  { label: "LinkedIn", href: personal.linkedinUrl, external: true },
+  { label: "Résumé",   href: "/resume", external: false },
 ];
 
 export function Profile() {
@@ -171,17 +172,27 @@ export function Profile() {
           {/* External links */}
           <ZoomReveal delay={0.36}>
             <div className="flex items-center flex-wrap gap-8">
-              {links.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono text-[11px] tracking-widest uppercase transition-colors text-[var(--step-5)] hover:text-[var(--off-white)]"
-                >
-                  {link.label} ↗
-                </a>
-              ))}
+              {links.map((link) =>
+                link.external ? (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono text-[11px] tracking-widest uppercase transition-colors text-[var(--step-5)] hover:text-[var(--off-white)]"
+                  >
+                    {link.label} ↗
+                  </a>
+                ) : (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="font-mono text-[11px] tracking-widest uppercase transition-colors text-[var(--step-5)] hover:text-[var(--off-white)]"
+                  >
+                    {link.label} ↗
+                  </Link>
+                )
+              )}
               <button
                 onClick={() => scrollToSection("contact")}
                 className="font-mono text-[11px] tracking-widest uppercase transition-colors text-[var(--base)] hover:text-[var(--base)]"

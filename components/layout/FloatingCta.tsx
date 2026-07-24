@@ -14,13 +14,6 @@ export function FloatingCta() {
         border: "1px solid var(--off-white)",
         padding: "0.75rem 1.5rem",
         cursor: "pointer",
-        // Forces its own stable GPU compositing layer so it can't get lost
-        // mid-scroll on mobile, on long pages with lots of scroll-linked
-        // motion values (ParallaxLayer, etc.) running under Lenis.
-        transform: "translateZ(0)",
-        willChange: "transform",
-        WebkitBackfaceVisibility: "hidden",
-        backfaceVisibility: "hidden",
       }}
       onMouseEnter={(e) => {
         const b = e.currentTarget;

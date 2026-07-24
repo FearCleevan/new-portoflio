@@ -51,7 +51,7 @@ export function Hero() {
 
   return (
     <div
-      className="section-px relative min-h-[100svh] flex flex-col justify-center overflow-hidden pt-16 pb-12 md:pt-24 md:pb-16"
+      className="section-px relative min-h-[100svh] flex flex-col justify-center pt-16 pb-12 md:pt-24 md:pb-16"
     >
       {/* Decorative circles — parallax at different speeds for depth */}
       <ParallaxLayer speed={80} className="absolute inset-0 pointer-events-none">

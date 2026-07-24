@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Oswald, Nunito, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/layout/Sidebar";
-import { MobileCta } from "@/components/layout/MobileCta";
+import { FloatingCta } from "@/components/layout/FloatingCta";
 import { ShaderBackground } from "@/components/effects/ShaderBackground";
 import { SmoothScroll } from "@/components/effects/SmoothScroll";
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -195,12 +195,12 @@ export default function RootLayout({
         {/* Fixed left sidebar (desktop) */}
         <Sidebar />
 
-        {/* Fixed bottom CTA bar (mobile — sidebar is hidden below md) */}
-        <MobileCta />
+        {/* Floating "Start a Project" CTA — all breakpoints */}
+        <FloatingCta />
 
         {/* Main content pushed right of sidebar */}
         <SmoothScroll>
-          <main className="sidebar-push min-h-screen pb-16 md:pb-0">
+          <main className="sidebar-push min-h-screen">
             {children}
           </main>
         </SmoothScroll>

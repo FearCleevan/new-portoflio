@@ -183,35 +183,6 @@ export default async function ServicePage({
             </p>
           </ZoomReveal>
         </div>
-
-        {/* ── Footer navigation / CTA ──────────────────────── */}
-        <div
-          className="section-px flex items-center justify-between flex-wrap gap-6"
-          style={{
-            paddingTop: "2rem",
-            paddingBottom: "4rem",
-            borderTop: "1px solid var(--step-3)",
-          }}
-        >
-          <Link
-            href="/#services"
-            className="font-mono text-[11px] tracking-widest uppercase transition-colors text-[var(--step-5)] hover:text-[var(--off-white)]"
-          >
-            ← Back to Services
-          </Link>
-          <Link
-            href="/#contact"
-            className="font-mono text-[11px] tracking-widest uppercase transition-colors"
-            style={{
-              padding: "0.75rem 1.5rem",
-              backgroundColor: "var(--off-white)",
-              color: "var(--base)",
-              border: "1px solid var(--off-white)",
-            }}
-          >
-            Get a Quote →
-          </Link>
-        </div>
       </div>
     </>
   );

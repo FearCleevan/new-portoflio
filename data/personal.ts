@@ -5,7 +5,7 @@ export const personal: PersonalDetails = {
   firstName: "Peter Paul",
   lastName: "Lazan",
   title: "Full-Stack Developer | IT Support Specialist | IT Systems & Credential Administrator",
-  email: "jonathan.mauring17@gmail.com",
+  email: "peter@peterpaullazan.com",
   phone: "09515379127",
   location: "Matina Aplaya, Davao City",
   summary:
@@ -17,5 +17,5 @@ export const personal: PersonalDetails = {
   linkedinUrl: "https://linkedin.com/in/peter-paul-lazan",
   instagramUrl: "https://www.instagram.com/fear.cleevan/",
   facebookUrl: "https://www.facebook.com/FearCleevan",
-  portfolioUrl: "https://lazandev.vercel.app",
+  portfolioUrl: "https://peterpaullazan.com",
 };

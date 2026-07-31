@@ -1,11 +1,23 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+import { personal } from "@/data/personal";
 
-const SHEET_URL = process.env.NEXT_PUBLIC_CONTACT_SHEET_URL ?? "";
+const SMTP_HOST = process.env.ZOHO_SMTP_HOST ?? "smtp.zoho.com";
+const SMTP_PORT = Number(process.env.ZOHO_SMTP_PORT ?? 465);
+const SMTP_USER = process.env.ZOHO_SMTP_USER ?? "";
+const SMTP_PASS = process.env.ZOHO_SMTP_PASS ?? "";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 export async function POST(req: Request) {
-  if (!SHEET_URL) {
+  if (!SMTP_USER || !SMTP_PASS) {
     return NextResponse.json(
       { ok: false, error: "Contact endpoint is not configured." },
       { status: 500 }
@@ -27,20 +39,22 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Missing or invalid fields." }, { status: 400 });
   }
 
-  try {
-    const params = new URLSearchParams({ name, email, message });
-    const res = await fetch(SHEET_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params.toString(),
-    });
+  const transporter = nodemailer.createTransport({
+    host: SMTP_HOST,
+    port: SMTP_PORT,
+    secure: SMTP_PORT === 465,
+    auth: { user: SMTP_USER, pass: SMTP_PASS },
+  });
 
-    if (!res.ok) {
-      return NextResponse.json(
-        { ok: false, error: "The message could not be delivered. Please try again." },
-        { status: 502 }
-      );
-    }
+  try {
+    await transporter.sendMail({
+      from: `"Portfolio Contact" <${SMTP_USER}>`,
+      to: personal.email,
+      replyTo: `"${name}" <${email}>`,
+      subject: `Portfolio Contact: ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+      html: `<p><strong>Name:</strong> ${escapeHtml(name)}</p><p><strong>Email:</strong> ${escapeHtml(email)}</p><p><strong>Message:</strong><br/>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>`,
+    });
 
     return NextResponse.json({ ok: true });
   } catch {

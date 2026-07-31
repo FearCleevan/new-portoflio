@@ -1,13 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { personal } from "@/data/personal";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
 const GENERIC_ERROR = "The message could not be delivered. Please try again.";
-
-const SHEET_URL = process.env.NEXT_PUBLIC_CONTACT_SHEET_URL ?? "";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -40,40 +37,27 @@ export function ContactForm() {
     setStatus("sending");
     setErrorMessage(null);
 
-    if (SHEET_URL) {
-      try {
-        const res = await fetch("/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, message }),
-        });
-        const data: { ok: boolean; error?: string } | null = await res.json().catch(() => null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+      const data: { ok: boolean; error?: string } | null = await res.json().catch(() => null);
 
-        if (!res.ok || !data?.ok) {
-          setErrorMessage(data?.error ?? GENERIC_ERROR);
-          setStatus("error");
-          return;
-        }
-
-        setStatus("sent");
-        setName("");
-        setMessage("");
-        return;
-      } catch {
-        setErrorMessage(GENERIC_ERROR);
+      if (!res.ok || !data?.ok) {
+        setErrorMessage(data?.error ?? GENERIC_ERROR);
         setStatus("error");
         return;
       }
+
+      setStatus("sent");
+      setName("");
+      setMessage("");
+    } catch {
+      setErrorMessage(GENERIC_ERROR);
+      setStatus("error");
     }
-
-    // mailto fallback — used only when no contact endpoint is configured
-    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
-    const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-    window.open(`mailto:${personal.email}?subject=${subject}&body=${body}`, "_blank");
-
-    setStatus("sent");
-    setName("");
-    setMessage("");
   }
 
   const inputBase: React.CSSProperties = {

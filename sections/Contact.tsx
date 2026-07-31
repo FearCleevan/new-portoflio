@@ -12,13 +12,18 @@ import { personal } from "@/data/personal";
 const whatsappNumber = personal.phone.replace(/^0/, "63");
 const whatsappMessage = encodeURIComponent("Hi Peter Paul, I'd like to talk about a project.");
 
+const emailSubject = encodeURIComponent("Regarding your portfolio");
+const emailBody = encodeURIComponent("Hello,\n\nI came across your portfolio and...");
+const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${personal.email}&su=${emailSubject}&body=${emailBody}`;
+
 const contactMethods = [
   {
     index: "01",
     label: "Email",
     value: personal.email,
-    href: `mailto:${personal.email}`,
+    href: gmailComposeUrl,
     cta: "Send a message →",
+    external: true,
   },
   {
     index: "02",

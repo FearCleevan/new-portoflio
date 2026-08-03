@@ -1,13 +1,16 @@
-// Scroll-linked parallax transform disabled: four simultaneous useScroll
-// instances (Hero/Profile/Projects/Contact) combined with Lenis's JS-driven
-// scroll were the one structural difference between the homepage (where the
-// fixed FloatingCta button was unreliable) and pages with no ParallaxLayer
-// usage (where it was always fine). Kept as a plain static wrapper so
-// Hero/Profile/Projects/Contact don't need to change their markup.
+"use client";
+
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { useHasMounted } from "@/hooks/useHasMounted";
 
 interface ParallaxLayerProps {
   children: React.ReactNode;
-  /** No longer used — kept so call sites don't need to change. */
+  /**
+   * Parallax strength in pixels. The element drifts ±speed px as it
+   * travels through the viewport. Higher = more movement.
+   * Default 60 is noticeable on decorative circles; use 20-30 for content.
+   */
   speed?: number;
   className?: string;
   style?: React.CSSProperties;
@@ -15,12 +18,33 @@ interface ParallaxLayerProps {
 
 export function ParallaxLayer({
   children,
+  speed = 60,
   className,
   style,
 }: ParallaxLayerProps) {
+  const mounted = useHasMounted();
+  const prefersReduced = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [`${speed}px`, `${-speed}px`]);
+
+  // Pre-mount: render identical to server (plain div — no transform state)
+  if (!mounted || prefersReduced) {
+    return (
+      <div ref={ref} className={className} style={style}>
+        {children}
+      </div>
+    );
+  }
+
   return (
-    <div className={className} style={style}>
+    <motion.div ref={ref} style={{ y, ...style }} className={className}>
       {children}
-    </div>
+    </motion.div>
   );
 }

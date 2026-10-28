@@ -1,3 +1,9 @@
+export interface GalleryImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
 export interface Project {
   id: string;
   index: string;
@@ -6,6 +12,7 @@ export interface Project {
   year: string;
   status: "Shipped" | "WIP";
   heroImage: string;
+  gallery?: GalleryImage[];
   stack: string[];
   github: string;
   live: string | null;
@@ -25,6 +32,26 @@ export const projects: Project[] = [
     status: "WIP",
     heroImage:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?fit=crop&w=1600&h=900&q=80",
+        alt: "HRIS SaaS Dashboard Analytics",
+        caption: "Dashboard Overview — Key HR metrics, active headcounts, and attendance summaries.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?fit=crop&w=1600&h=900&q=80",
+        alt: "HRIS Payroll Computation Interface",
+        caption: "Payroll Management — Automatic tax computation, deductions, and payslip generation.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1551434678-e076c223a692?fit=crop&w=1600&h=900&q=80",
+        alt: "HRIS Employee Directory",
+        caption: "Employee Directory — Profile tracking, department filtering, and leave balances.",
+      },
+    ],
     stack: ["Next.js", "React", "React Native", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS"],
     github: "https://github.com/FearCleevan/hris-saas-platform",
     live: "https://hrisph.vercel.app/",
@@ -81,6 +108,26 @@ Core payroll and attendance modules are complete. Leave management and advanced 
     status: "WIP",
     heroImage:
       "https://images.unsplash.com/photo-1611224923853-80b023f02d71?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1611224923853-80b023f02d71?fit=crop&w=1600&h=900&q=80",
+        alt: "HRIS Admin Control Panel",
+        caption: "Admin Dashboard — Centralized organization control panel and real-time workforce view.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?fit=crop&w=1600&h=900&q=80",
+        alt: "HRIS Attendance Review",
+        caption: "Attendance Review — Daily shift logs, punch timecards, and leave approvals.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?fit=crop&w=1600&h=900&q=80",
+        alt: "HRIS Access Permissions",
+        caption: "Role Permissions — Granular access control for Super Admins and HR Managers.",
+      },
+    ],
     stack: ["React", "Vite", "TypeScript", "Tailwind CSS", "Supabase"],
     github: "https://github.com/FearCleevan/hris-saas-platform",
     live: "https://adminhrisph.vercel.app/",
@@ -126,6 +173,20 @@ Core employee management and payroll run screens are complete. Analytics module 
     status: "Shipped",
     heroImage:
       "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?fit=crop&w=1600&h=900&q=80",
+        alt: "AI Assistant Chat Interface",
+        caption: "Chat Interface — Context-aware QA running completely offline on local LLM.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?fit=crop&w=1600&h=900&q=80",
+        alt: "Local RAG Vector Ingestion",
+        caption: "Local RAG Pipeline — Document parsing, embedding generation, and ChromaDB search.",
+      },
+    ],
     stack: ["Python", "Ollama", "ChromaDB", "FastAPI", "sentence-transformers", "PyQt6"],
     github: "https://github.com/FearCleevan/My-AI-Assistant",
     live: null,
@@ -186,6 +247,20 @@ ChromaDB's persistent mode writes embeddings to disk, so re-ingesting the same d
     status: "Shipped",
     heroImage:
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?fit=crop&w=1600&h=900&q=80",
+        alt: "PayUp Expense Splitter",
+        caption: "Expense Dashboard — Shared group balance calculations and settle-up flows.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?fit=crop&w=1600&h=900&q=80",
+        alt: "Receipt Itemization View",
+        caption: "Itemized Receipt Split — Per-person distribution, taxes, and tips breakdown.",
+      },
+    ],
     stack: ["React Native", "Expo Router", "TypeScript", "NativeWind", "Supabase"],
     github: "https://github.com/FearCleevan/Payup",
     live: null,
@@ -231,6 +306,20 @@ Supabase Edge Functions handle the scheduled reminder dispatch — they query ov
     status: "Shipped",
     heroImage:
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?fit=crop&w=1600&h=900&q=80",
+        alt: "Vyralyx Automation Studio",
+        caption: "Automation Studio — Batch video script creation and caption synthesis pipeline.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1536240478700-b869070f9279?fit=crop&w=1600&h=900&q=80",
+        alt: "Video Rendering Queue",
+        caption: "Rendering Queue — Automated audio-visual sync and platform format previews.",
+      },
+    ],
     stack: ["React Native", "Expo Router", "TypeScript", "NativeWind", "Supabase"],
     github: "https://github.com/FearCleevan/vyralyx-fitness-app",
     live: null,
@@ -282,6 +371,20 @@ NativeWind's responsive utilities don't translate 1:1 from the web — breakpoin
     status: "Shipped",
     heroImage:
       "https://images.unsplash.com/photo-1555099962-4199c345e5dd?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1555099962-4199c345e5dd?fit=crop&w=1600&h=900&q=80",
+        alt: "Gooey Toast Interactive Playground",
+        caption: "Interactive Playground — Physics tuning for fluid fluid-damping animations.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?fit=crop&w=1600&h=900&q=80",
+        alt: "Gooey Toast Component Variants",
+        caption: "Component Variants — Stackable toast notifications with custom springs.",
+      },
+    ],
     stack: ["React Native", "Expo", "TypeScript", "Reanimated", "React Native SVG", "Turborepo", "pnpm"],
     github: "https://github.com/FearCleevan/rentapp",
     live: null,
@@ -335,6 +438,20 @@ Turborepo handles build caching and task orchestration across packages. pnpm wor
     status: "Shipped",
     heroImage:
       "https://images.unsplash.com/photo-1560518883-ce09059eeffa?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1560518883-ce09059eeffa?fit=crop&w=1600&h=900&q=80",
+        alt: "Rent App Tenant Billing",
+        caption: "Mobile App Screen — Tenant billing portal and monthly rental ledger.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1582407947304-fd86f028f716?fit=crop&w=1600&h=900&q=80",
+        alt: "Unit Management & Maintenance",
+        caption: "Unit Management — Maintenance requests and lease documentation tracker.",
+      },
+    ],
     stack: ["React Native", "TypeScript", "Supabase", "JavaScript"],
     github: "https://github.com/FearCleevan/rentapp",
     live: null,
@@ -375,6 +492,20 @@ Built for landlords who are not technically sophisticated — the UX prioritises
     status: "Shipped",
     heroImage:
       "https://images.unsplash.com/photo-1611224923853-80b023f02d71?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1611224923853-80b023f02d71?fit=crop&w=1600&h=900&q=80",
+        alt: "Project Management Kanban Board",
+        caption: "Kanban Workspace — Drag-and-drop sprint boards with priority lanes.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1531403009284-440f080d1e12?fit=crop&w=1600&h=900&q=80",
+        alt: "Timeline and Milestones",
+        caption: "Timeline & Gantt — Resource workload and critical path milestones.",
+      },
+    ],
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/FearCleevan/projectmanagement",
     live: "https://projectmanagement-smoky.vercel.app/login",
@@ -415,6 +546,20 @@ Built during the role at Poseidon Distribution OPC as a learning exercise after 
     status: "Shipped",
     heroImage:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?fit=crop&w=1600&h=900&q=80",
+        alt: "Launchpad Agency Hero Experience",
+        caption: "Hero Experience — Typography-led agency showcase with dark aesthetic.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?fit=crop&w=1600&h=900&q=80",
+        alt: "Services and Case Studies",
+        caption: "Services Breakdown — Interactive capabilities and client case studies.",
+      },
+    ],
     stack: ["React.js", "Google Apps Script", "Google Sheets"],
     github: "https://github.com/FearCleevan/prospect",
     live: "https://www.thelaunchpadteam.com/",
@@ -462,6 +607,20 @@ Using Google Apps Script as a serverless function endpoint eliminates hosting co
     status: "Shipped",
     heroImage:
       "https://images.unsplash.com/photo-1587620962725-abab7fe55159?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1587620962725-abab7fe55159?fit=crop&w=1600&h=900&q=80",
+        alt: "Real-time Workspace Messenger",
+        caption: "Workspace Messenger — Real-time channel conversations and rich messages.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?fit=crop&w=1600&h=900&q=80",
+        alt: "Direct Messages Interface",
+        caption: "Direct Messages — Online indicators, read receipts, and file attachments.",
+      },
+    ],
     stack: ["React.js", "Firebase", "Firestore", "Authentication", "Cloudinary"],
     github: "#",
     live: null,
@@ -507,6 +666,20 @@ Firestore's real-time listeners update the UI within milliseconds of a message b
     status: "Shipped",
     heroImage:
       "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?fit=crop&w=1600&h=900&q=80",
+        alt: "Landing Page CRM Conversion Dashboard",
+        caption: "Conversion Dashboard — Inbound lead tracking and campaign analytics.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?fit=crop&w=1600&h=900&q=80",
+        alt: "CRM Pipeline Sync",
+        caption: "CRM Integration — Webhook payloads and customer lifecycle stages.",
+      },
+    ],
     stack: ["React.js", "Node.js", "Express.js", "MySQL"],
     github: "#",
     live: null,
@@ -551,6 +724,20 @@ The core data model centres on three entities: **Lead** (the prospect), **Activi
     status: "Shipped",
     heroImage:
       "https://images.unsplash.com/photo-1518770660439-4636190af475?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1518770660439-4636190af475?fit=crop&w=1600&h=900&q=80",
+        alt: "TechnoBuild Storefront Catalog",
+        caption: "Storefront Catalog — Hardware components with spec comparisons.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1591488320449-011701bb6704?fit=crop&w=1600&h=900&q=80",
+        alt: "PC Builder Configurator",
+        caption: "PC Builder Configurator — Real-time component compatibility checks.",
+      },
+    ],
     stack: ["React.js", "Firebase", "Gemini API", "Cloudinary"],
     github: "#",
     live: null,
@@ -593,6 +780,20 @@ The Gemini API receives a structured prompt containing the user's budget, primar
     status: "Shipped",
     heroImage:
       "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?fit=crop&w=1600&h=900&q=80",
+        alt: "School Portal & SIS",
+        caption: "SIS Portal — Student gradebooks, attendance rosters, and class schedules.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?fit=crop&w=1600&h=900&q=80",
+        alt: "Faculty Records & Courses",
+        caption: "Faculty Records — Course syllabus management and departmental metrics.",
+      },
+    ],
     stack: ["React.js", "Firebase", "Firestore", "Authentication", "Cloudinary"],
     github: "#",
     live: null,
@@ -635,6 +836,20 @@ Firestore collections mirror the school's hierarchy: School → Department → S
     status: "Shipped",
     heroImage:
       "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?fit=crop&w=1600&h=900&q=80",
+        alt: "ScapeDBM Schema Inspector",
+        caption: "Database Visualizer — Relational entity diagrams and schema inspector.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?fit=crop&w=1600&h=900&q=80",
+        alt: "SQL Query Console",
+        caption: "SQL Query Console — Query execution, execution plans, and result tables.",
+      },
+    ],
     stack: ["React.js", "CSS3", "Cloudinary"],
     github: "#",
     live: null,
@@ -676,6 +891,20 @@ Built without a CSS framework to keep the bundle minimal for a small business si
     status: "Shipped",
     heroImage:
       "https://images.unsplash.com/photo-1542831371-29b0f74f9713?fit=crop&w=1600&h=800&q=80",
+    gallery: [
+      {
+        src:
+          "https://images.unsplash.com/photo-1542831371-29b0f74f9713?fit=crop&w=1600&h=900&q=80",
+        alt: "Portfolio v1 Homepage",
+        caption: "Portfolio v1 Homepage — Minimal dark interface and project directory.",
+      },
+      {
+        src:
+          "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?fit=crop&w=1600&h=900&q=80",
+        alt: "Interactive Gemini AI Assistant",
+        caption: "Interactive Gemini AI Bot — Custom portfolio assistant with natural dialogue.",
+      },
+    ],
     stack: ["React.js", "Tailwind CSS", "Google Gemini API"],
     github: "#",
     live: "https://lazandev.vercel.app",
@@ -713,4 +942,17 @@ The chatbot uses Gemini's chat API with a system prompt containing detailed cont
 
 export function getProject(id: string): Project | undefined {
   return projects.find((p) => p.id === id);
+}
+
+export function getProjectGallery(project: Project): GalleryImage[] {
+  if (project.gallery && project.gallery.length > 0) {
+    return project.gallery;
+  }
+  return [
+    {
+      src: project.heroImage,
+      alt: `${project.title} Preview`,
+      caption: project.tagline,
+    },
+  ];
 }

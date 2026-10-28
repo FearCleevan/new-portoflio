@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
-import { projects, getProject } from "@/data/projects";
+import { projects, getProject, getProjectGallery } from "@/data/projects";
 import { SectionLabel } from "@/components/layout/SectionLabel";
+import { ProjectGallery } from "@/components/projects/ProjectGallery";
 import { MarkdownRenderer } from "@/components/projects/MarkdownRenderer";
 import { CodePreview } from "@/components/projects/CodePreview";
 import { ZoomReveal } from "@/components/motion/ZoomReveal";
@@ -104,57 +104,30 @@ export default async function ProjectPage({
         </span>
       </div>
 
-      {/* ── Hero image ───────────────────────────────────── */}
-      <div
-        className="relative w-full overflow-hidden"
-        style={{ height: "clamp(240px, 45vh, 520px)" }}
-      >
-        <Image
-          src={project.heroImage}
-          alt={project.title}
-          fill
-          priority
-          sizes="100vw"
-          style={{
-            objectFit: "cover",
-            filter: "grayscale(100%) contrast(1.1) brightness(0.55)",
-          }}
-        />
-
-        {/* Gradient scrim — fades image into the base color at the bottom */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(18,18,18,0) 40%, rgba(18,18,18,1) 100%)",
-          }}
-        />
-
-        {/* Status + year badges over the image */}
-        <div className="absolute top-5 left-8 flex items-center gap-3">
-          <span
-            className="font-mono text-[10px] tracking-widest px-2 py-1"
-            style={{
-              backgroundColor: "rgba(18,18,18,0.8)",
-              border: "1px solid var(--step-3)",
-              color:
-                project.status === "WIP" ? "var(--mid-gray)" : "var(--step-5)",
-            }}
-          >
-            {project.status === "WIP" ? "in progress" : "shipped"}
-          </span>
-          <span
-            className="font-mono text-[10px] tracking-widest"
-            style={{ color: "var(--step-5)" }}
-          >
-            {project.year}
-          </span>
-        </div>
-      </div>
-
       {/* ── Project header ───────────────────────────────── */}
-      <div className="section-px" style={{ paddingTop: "3rem", paddingBottom: "0" }}>
+      <div className="section-px" style={{ paddingTop: "2.5rem", paddingBottom: "2rem" }}>
         <ZoomReveal trigger="animate" delay={0.1}>
+          {/* Status + year badges */}
+          <div className="flex items-center gap-3 mb-6">
+            <span
+              className="font-mono text-[10px] tracking-widest px-2.5 py-1 uppercase"
+              style={{
+                backgroundColor: "var(--step-1)",
+                border: "1px solid var(--step-3)",
+                color:
+                  project.status === "WIP" ? "var(--mid-gray)" : "var(--off-white)",
+              }}
+            >
+              {project.status === "WIP" ? "in progress" : "shipped"}
+            </span>
+            <span
+              className="font-mono text-[10px] tracking-widest"
+              style={{ color: "var(--step-5)" }}
+            >
+              {project.year}
+            </span>
+          </div>
+
           <SectionLabel>{project.title}</SectionLabel>
 
           <h1
@@ -191,7 +164,7 @@ export default async function ProjectPage({
           </div>
 
           {/* Project links */}
-          <div className="flex items-center gap-6 mb-12">
+          <div className="flex items-center gap-6 mb-6">
             {project.github !== "#" && (
               <a
                 href={project.github}
@@ -210,8 +183,31 @@ export default async function ProjectPage({
             )}
           </div>
         </ZoomReveal>
+      </div>
 
-        {/* Hairline divider before content */}
+      {/* Hairline divider before gallery */}
+      <div className="section-px">
+        <div style={{ height: "1px", backgroundColor: "var(--step-3)" }} />
+      </div>
+
+      {/* ── UI Screenshot Gallery ──────────────────────────── */}
+      <div className="section-px" style={{ paddingTop: "2.5rem", paddingBottom: "3rem" }}>
+        <ZoomReveal trigger="animate" delay={0.15}>
+          <div
+            className="font-mono text-[10px] tracking-[0.25em] mb-4 uppercase"
+            style={{ color: "var(--step-5)" }}
+          >
+            ... /gallery ...
+          </div>
+          <ProjectGallery
+            images={getProjectGallery(project)}
+            projectTitle={project.title}
+          />
+        </ZoomReveal>
+      </div>
+
+      {/* Hairline divider before content */}
+      <div className="section-px">
         <div style={{ height: "1px", backgroundColor: "var(--step-3)" }} />
       </div>
 
